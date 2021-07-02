@@ -113,11 +113,11 @@ Object.omitBy({a : 1, b : 2}, (v, k) => k === 'b'); // => {a: 1}
     Object.omit({a : 1}, ['toString']).toString; // => ƒ toString() { [native code] }
     ```
 
-    The same rule applies to the `__proto__`:
+    ~~The same rule applies to `__proto__`:~~ The same rule should not apply to `__proto__` because it has been [deprecated](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/proto):
 
     ```js
-    Object.pick({}, ['__proto__']); // => {__proto__: {...}}
-    Object.omit({}, ['__proto__']).__proto__; // => {...} 
+    Object.pick({}, ['__proto__']); // => {}
+    Object.omit({}, ['__proto__']).__proto__; // => undefined 
     ```
 
     In some opinions, picking off or omitting properties from the prototype chain should make the method more extendable:
